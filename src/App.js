@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //importing countries object from countries.js file
 const countries = require("./countries");
@@ -10,16 +10,17 @@ const countriesArray = Object.keys(countries); //Alpha-2 exmple US or UK
 
 const countriesNamesArray = Object.values(countries);
 
-const url = "https://countryflagsapi.com/png/";
-
 function App() {
+  let images = [];
+
   const [count, setCount] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [wrong, setWrong] = useState(0);
   const [RightAnswer, setRightAnswer] = useState("");
-
-  const RandomNumPick = Math.floor(Math.random() * 249) + 1;
+  const [picker, setpicker] = useState("");
+  const RandomNumPick = Math.floor(Math.random() * 238) + 1;
   const RandomNumBtn = Math.floor(Math.random() * 3) + 1;
+  const [isLoading, setIsLoading] = useState(true);
 
   function generateRandom(min, max, excluded = 0) {
     var num = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -31,10 +32,11 @@ function App() {
       setCorrect(correct + 1);
       console.log("correct");
       console.log("picker" + picker);
-
+      setpicker("");
       setRightAnswer("Well done");
     } else {
       console.log("picker" + picker);
+      setpicker(picker);
       setWrong(wrong + 1);
       setRightAnswer("The Right Answer was " + RightAnswer);
     }
@@ -42,19 +44,68 @@ function App() {
     setCount(count + 1);
   }
 
+
+  for (let index = 0; index < countriesArray.length; index++) {
+    const img = new Image();
+    img.src = require(`./flags/${countriesArray[index].toLowerCase()}.svg`);
+    img.onload = () => {
+      console.log("done");
+    };
+    images.push(img);
+  }
+  
+
+
+
+  
+ 
+  console.log(images);
+
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="CorrectCount">Correct {correct}</h1>
-        <h1>Wrong {wrong}</h1>
+        <h1 className="WrongCount ">Wrong {wrong}</h1>
+
         <img
-          src={url + countriesArray[RandomNumPick]}
+          src={
+            images[RandomNumPick].currentSrc
+            //   FLAGS[countriesArray[1]]
+
+            // require(`./flags/${countriesArray[
+            //   RandomNumPick
+            // ].toLowerCase()}.svg`)
+          }
           className="flag"
           alt="countryflag"
-          crossOrigin=""
+          crossOrigin="anonymous"
         />
+        <div>
+          <h2
+            style={{
+              display: "inline",
+              paddingInline: "10px",
+              color: "yellow",
+            }}
+          >
+            {RightAnswer}
+          </h2>
+          {picker ? (
+            <img
+              style={{ height: 25, marginTop: "10px" }}
+              src={
+                //   FLAGS[countriesArray[1]]
 
-        <h2>{RightAnswer}</h2>
+                require(`./flags/${countriesArray[picker].toLowerCase()}.svg`)
+              }
+              className="flag"
+              alt="countryflag"
+              crossOrigin="anonymous"
+            />
+          ) : (
+            ""
+          )}
+        </div>
 
         <div className="Btn-Container">
           <button
@@ -71,7 +122,7 @@ function App() {
           >
             {RandomNumBtn === 1
               ? countriesNamesArray[RandomNumPick]
-              : countriesNamesArray[generateRandom(1, 249, RandomNumPick)]}
+              : countriesNamesArray[generateRandom(1, 238, RandomNumPick)]}
           </button>
 
           <button
@@ -88,7 +139,7 @@ function App() {
           >
             {RandomNumBtn === 2
               ? countriesNamesArray[RandomNumPick]
-              : countriesNamesArray[generateRandom(1, 249, RandomNumPick)]}
+              : countriesNamesArray[generateRandom(1, 238, RandomNumPick)]}
           </button>
 
           <button
@@ -105,7 +156,7 @@ function App() {
           >
             {RandomNumBtn === 3
               ? countriesNamesArray[RandomNumPick]
-              : countriesNamesArray[generateRandom(1, 249, RandomNumPick)]}
+              : countriesNamesArray[generateRandom(1, 238, RandomNumPick)]}
           </button>
         </div>
       </header>

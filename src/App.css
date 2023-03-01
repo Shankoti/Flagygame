@@ -3,11 +3,13 @@
 }
 
 .flag {
+  margin-top: -20px;
   height: 40vmin;
   pointer-events: none;
 }
 
 .App-header {
+  height: min-content;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -23,7 +25,7 @@
 }
 
 .Button-Select {
-  white-space: normal;
+  white-space: break-spaces;
   font: 1em Rowdies;
   font-size: 20 px;
   color: #000000;
@@ -46,10 +48,14 @@
 }
 
 .CorrectCount {
-  padding: 3;
+  padding: 1;
   color: green;
+  font-size: x-large;
 }
 .WrongCount {
+  padding: 1px;
+  color: red;
+  font-size: x-large;
 }
 
 h2 {
