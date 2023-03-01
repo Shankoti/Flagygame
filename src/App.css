@@ -48,12 +48,12 @@
 }
 
 .CorrectCount {
-  padding: 1;
+  padding: 10px;
   color: green;
   font-size: x-large;
 }
 .WrongCount {
-  padding: 1px;
+  padding: 10px;
   color: red;
   font-size: x-large;
 }
