@@ -24,18 +24,19 @@
   color: #61dafb;
 }
 
-.Button-Select {
+.Button-Select { 
+
   white-space: break-spaces;
   font: 1em Rowdies;
   font-size: 20 px;
   color: #000000;
-  width: 200px;
   height: 50px;
   margin: 10px; /* for 10px of margin space */
   padding: 10px; /* for 10px of padding space */
   background-color: #f2f6f8; /* a light shade of blue */
   border: 2px solid rgb(68, 148, 228); /* an inner border */
   border-radius: 9px; /* rounded edges */
+  width: fit-content;
 }
 .Button-Select:hover {
   color: #f2f6f8;
@@ -56,6 +57,13 @@
   padding: 10px;
   color: red;
   font-size: x-large;
+}
+
+.circle {
+  height: 50px;
+  width: 50px;
+  background-color: #3e8706;
+  border-radius: 50%;
 }
 
 h2 {

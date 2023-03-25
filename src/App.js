@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 //importing countries object from countries.js file
 const countries = require("./countries");
@@ -11,16 +11,13 @@ const countriesArray = Object.keys(countries); //Alpha-2 exmple US or UK
 const countriesNamesArray = Object.values(countries);
 
 function App() {
-  let images = [];
-
   const [count, setCount] = useState(0);
   const [correct, setCorrect] = useState(0);
-  const [wrong, setWrong] = useState(0);
+  const [wrong, setWrong] = useState(3);
   const [RightAnswer, setRightAnswer] = useState("");
   const [picker, setpicker] = useState("");
   const RandomNumPick = Math.floor(Math.random() * 238) + 1;
   const RandomNumBtn = Math.floor(Math.random() * 3) + 1;
-  const [isLoading, setIsLoading] = useState(true);
 
   function generateRandom(min, max, excluded = 0) {
     var num = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -37,45 +34,36 @@ function App() {
     } else {
       console.log("picker" + picker);
       setpicker(picker);
-      setWrong(wrong + 1);
+      setWrong(wrong - 1);
       setRightAnswer("The Right Answer was " + RightAnswer);
     }
 
     setCount(count + 1);
   }
-
-
-  for (let index = 0; index < countriesArray.length; index++) {
-    const img = new Image();
-    img.src = require(`./flags/${countriesArray[index].toLowerCase()}.svg`);
-    img.onload = () => {
-      console.log("done");
-    };
-    images.push(img);
+  if (wrong == 0) {
+    return (
+      <div className="App">
+        <header className="App-header">
+        <div style={{ display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh'}}>
+      <div className="circle"></div>
+      </div>
+          </header>
+      </div>
+    );
   }
-  
-
-
-
-  
- 
-  console.log(images);
-
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="CorrectCount">Correct {correct}</h1>
-        <h1 className="WrongCount ">Wrong {wrong}</h1>
+        <h1 className="WrongCount "> lives : {wrong}</h1>
 
         <img
-          src={
-            images[RandomNumPick].currentSrc
-            //   FLAGS[countriesArray[1]]
-
-            // require(`./flags/${countriesArray[
-            //   RandomNumPick
-            // ].toLowerCase()}.svg`)
-          }
+          src={require(`./flags/${countriesArray[
+            RandomNumPick
+          ].toLowerCase()}.svg`)}
           className="flag"
           alt="countryflag"
           crossOrigin="anonymous"
