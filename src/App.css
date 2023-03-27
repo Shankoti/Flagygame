@@ -67,5 +67,34 @@
 }
 
 h2 {
-  font-size: medium;
+  font-size: large;
+}
+
+.floating-component {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  padding: 20px;
+  background-color: rgb(156, 112, 112);
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.leaderboard {
+  font-size: 14px;
+}
+
+.player-number {
+  margin-right: 1px;
+  
+}
+
+.player-name {
+  margin-right: 15px;
+}
+
+.player-score {
+  margin-right: 10px;
+}
+.input {
+  text-align: center;
 }
